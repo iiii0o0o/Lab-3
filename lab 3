@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab3</title>
+
+</head>
+<body>
+    <h1>Lab 3 </h1>
+    <h2>Apr 19,2023</h2>
+    <h4>Zhen Zhang Student No. 101405471</h4>
+    <h3>Section 1</h3>
+
+    <form>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <br><br>
+        <button type="submit" id="submit-btn">Submit</button>
+      </form>
+      
+      <script>
+        function validateForm() {
+          const username = document.getElementById('username').value;
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+      
+          if (!/^[a-zA-Z0-9]+$/.test(username)||!username) {
+            window.alert('Form submission failed: Invalid username. Username can have only letters and numbers');
+            console.log('Form submission failed: Invalid username. Username can have only letters and numbers');
+            return;
+          }
+          if (!/@/.test(email)  ||!email) {
+            window.alert('Form submission failed: Invalid email. Email must include "@"');
+            console.log('Form submission failed: Invalid email. Email must include "@"');
+            return;
+          }
+          if (!password || password.length < 8) {
+            window.alert('Form submission failed: Invalid password. Password must have at least 8 characters');
+            console.log('Form submission failed: Invalid password. Password must have at least 8 characters');
+            return;
+          }
+
+          window.alert("Form submitted successfully");
+          console.log('Form submitted successfully');
+        }
+      
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.addEventListener('click', function(event) {
+          event.preventDefault();
+          validateForm();
+        });
+      </script>
+
+      <h3>Section 2</h3>
+      <h1>Product Filter</h1>
+    <label for="search-input">Search Result:</label>
+    <input id="search-input" type="text">
+    <ul id="product-array">
+
+    </ul>
+
+    <script>
+
+        const products = [
+            "Brake",
+            "Fluid",
+            "Suspension",
+            "Deals",
+            "Engine",
+            "Lights",
+            "Restoration",
+            "Tuners",
+            "Gift",
+            "Exhaust",
+        ];
+
+
+        const PartsList = document.getElementById("product-array");
+        for (let product of products) {
+            const listPieces = document.createElement("li");
+            listPieces.textContent = product;
+            PartsList.appendChild(listPieces);
+        }
+
+
+        function searchProducts(query) {
+            return products.filter(product => product.toLowerCase().includes(query.toLowerCase()));
+        }
+
+
+        const searchInput = document.getElementById("search-input");
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value;
+            const filteredProducts = searchProducts(query);
+
+
+            PartsList.innerHTML = "";
+
+
+            for (let product of filteredProducts) {
+                const listPieces = document.createElement("li");
+                listPieces.textContent = product;
+                PartsList.appendChild(listPieces);
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>
